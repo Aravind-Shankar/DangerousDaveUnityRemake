@@ -3,6 +3,18 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 
+	/**
+	*	Script for getting input from the user and controlling the player.
+	*
+	*	This script has to be attached as a component to the player to control.
+	*	Also the player object must have a child empty GameObject called "ground_check"
+	*	vertically below it, so that the jump mechanism can work properly.
+	*	This empty child must be close enough to the player object so that if and only if the player is grounded,
+	*	the ground_check object also touches/goes into the ground.
+	*
+	*	See "TestCharacter.unity" for an example scene with a ball as the player.
+	*/
+
 	private bool canJump = false, grounded = true;
 	private bool facingRight = true;
 	private Transform groundCheck;
