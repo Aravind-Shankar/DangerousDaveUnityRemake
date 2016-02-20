@@ -3,8 +3,9 @@ using System.Collections;
 
 public class RotateCollectables : MonoBehaviour {
 
-	void Update ()
-    {
-        transform.Rotate(new Vector3(0,0,15) * Time.deltaTime * 3);
+	public Vector3 rotationVector = new Vector3(0,0,45);
+
+	void FixedUpdate () {
+        transform.Rotate(rotationVector * Time.deltaTime);
     }
 }
