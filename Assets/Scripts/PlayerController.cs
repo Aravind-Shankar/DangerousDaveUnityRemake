@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class PlayerController : MonoBehaviour {
@@ -19,11 +20,18 @@ public class PlayerController : MonoBehaviour {
 	private bool facingRight = true;
 	private Transform groundCheck;
 	private Vector2 groundInitPosition;
+    private int points;
 
 	public float moveForce = 10f;
 	public float maxSpeed = 10f;
 	public float jumpForce = 300f;
+    public TextMesh score;
 
+    void Start()
+    {
+        points = 0;
+        UpdateScore();
+    }
 	void Awake () {
 		groundCheck = transform.Find ("ground_check");
 		//groundInitPosition = groundCheck.localPosition;
@@ -46,4 +54,19 @@ public class PlayerController : MonoBehaviour {
 			canJump = false;
 		}
 	}
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Pick up"))
+        {
+            other.gameObject.SetActive(false);
+            points = points + 1;
+            UpdateScore();
+        }
+    }
+
+    void UpdateScore()
+    {
+        score.text = "Score: " + points.ToString();
+    }
 }
