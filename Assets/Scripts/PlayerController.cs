@@ -16,7 +16,9 @@ public class PlayerController : MonoBehaviour {
 	*	See "TestCharacter.unity" for an example scene with a ball as the player.
 	*/
 
-	private bool canJump = false, grounded = true;
+	private bool canJump = false;
+	private bool grounded = true;
+	private bool facingRight = true;
 	private Transform groundCheck;
 	private Vector3 groundCheckRelativePosition;
     private int points;
@@ -44,14 +46,13 @@ public class PlayerController : MonoBehaviour {
 	
 	void FixedUpdate () {
 		float horiz = Input.GetAxis ("Horizontal");
-		if (horiz * GetComponent<Rigidbody2D> ().velocity.x < maxSpeed) {
+		if (horiz * GetComponent<Rigidbody2D> ().velocity.x < maxSpeed)
 			GetComponent<Rigidbody2D> ().AddForce (Vector2.right * horiz * moveForce);
-			if (horiz * GetComponent<Rigidbody2D>().velocity.x < 0)
-				Flip();
-		}
 		if (Mathf.Abs (GetComponent<Rigidbody2D> ().velocity.x) > maxSpeed)
 			GetComponent<Rigidbody2D> ().velocity = new Vector2(Mathf.Sign (GetComponent<Rigidbody2D> ().velocity.x) * maxSpeed,
 			                                                    GetComponent<Rigidbody2D>().velocity.y);
+		if ((horiz < 0 && facingRight) || (horiz > 0 && !facingRight))
+			Flip ();
 		if (canJump) {
 			GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpForce);
 			canJump = false;
@@ -74,5 +75,9 @@ public class PlayerController : MonoBehaviour {
     }
 
 	void Flip() {
+		Vector3 newScale = transform.localScale;
+		newScale.x *= -1;
+		transform.localScale = newScale;
+		facingRight = !facingRight;
 	}
 }
