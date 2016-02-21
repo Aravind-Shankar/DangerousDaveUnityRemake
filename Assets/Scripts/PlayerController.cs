@@ -18,25 +18,28 @@ public class PlayerController : MonoBehaviour {
 
 	private bool canJump = false, grounded = true;
 	private Transform groundCheck;
+	private Vector3 groundCheckRelativePosition;
     private int points;
+	private int groundLayerMask;
 
 	public float moveForce = 10f;
 	public float maxSpeed = 10f;
 	public float jumpForce = 300f;
     public TextMesh score;
 
-    void Start()
-    {
+    void Start() {
+		groundCheck = transform.Find ("ground_check");
+		groundCheckRelativePosition = transform.position - groundCheck.position;
         points = 0;
+		groundLayerMask = (1 << LayerMask.NameToLayer ("Ground Layer"));
         UpdateScore();
     }
-	void Awake () {
-		groundCheck = transform.Find ("ground_check");
-	}
 
 	void Update() {
-		grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground Layer"));
-		canJump = (Input.GetButton("Jump") && grounded);
+		groundCheck.position = transform.position - groundCheckRelativePosition;
+		grounded = Physics2D.Linecast(transform.position, groundCheck.position, groundLayerMask);
+		if (Input.GetButtonDown ("Jump") && grounded)
+			canJump = true;
 	}
 	
 	void FixedUpdate () {
@@ -47,7 +50,8 @@ public class PlayerController : MonoBehaviour {
 				Flip();
 		}
 		if (Mathf.Abs (GetComponent<Rigidbody2D> ().velocity.x) > maxSpeed)
-			GetComponent<Rigidbody2D> ().velocity = Vector2.right * Mathf.Sign (GetComponent<Rigidbody2D> ().velocity.x) * maxSpeed;
+			GetComponent<Rigidbody2D> ().velocity = new Vector2(Mathf.Sign (GetComponent<Rigidbody2D> ().velocity.x) * maxSpeed,
+			                                                    GetComponent<Rigidbody2D>().velocity.y);
 		if (canJump) {
 			GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpForce);
 			canJump = false;
