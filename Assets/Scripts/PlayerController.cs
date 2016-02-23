@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour {
 	private bool canJump = false;
 	private bool grounded = true;
 	private bool facingRight = true;
+	private bool gotTrophy = false;
 	private Transform groundCheck;
 	private Vector3 groundCheckRelativePosition;
     private int points;
@@ -28,6 +29,7 @@ public class PlayerController : MonoBehaviour {
 	public float maxSpeed = 10f;
 	public float jumpForce = 300f;
     public TextMesh score;
+	public TextMesh trophyMessageBox;
 
     void Start() {
 		groundCheck = transform.Find ("ground_check");
@@ -61,12 +63,17 @@ public class PlayerController : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Pick up"))
-        {
-            other.gameObject.SetActive(false);
-            points = points + 1;
-            UpdateScore();
-        }
+        if (other.gameObject.CompareTag ("Pick up")) {
+			other.gameObject.SetActive (false);
+			points = points + 1;
+			UpdateScore ();
+		} else if (other.gameObject.CompareTag ("Trophy")) {
+			other.gameObject.SetActive(false);
+			gotTrophy = true;
+			trophyMessageBox.gameObject.SetActive(true);
+		} else if (other.gameObject.CompareTag ("Door")) {
+			if (gotTrophy) Application.LoadLevel("Level1");
+		}
     }
 
     void UpdateScore()
