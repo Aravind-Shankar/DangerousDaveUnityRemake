@@ -16,14 +16,15 @@ public class PlayerController : MonoBehaviour {
 	*	See "TestCharacter.unity" for an example scene with a ball as the player.
 	*/
 
+	private static int points = 0;
+
 	private bool canJump = false;
 	private bool grounded = true;
 	private bool facingRight = true;
 	private bool gotTrophy = false;
 	private Transform groundCheck;
 	private Vector3 groundCheckRelativePosition;
-    private int points;
-	private int groundLayerMask;
+    private int groundLayerMask;
 
 	public float moveForce = 10f;
 	public float maxSpeed = 10f;
@@ -35,8 +36,7 @@ public class PlayerController : MonoBehaviour {
     void Start() {
 		groundCheck = transform.Find ("ground_check");
 		groundCheckRelativePosition = transform.position - groundCheck.position;
-        points = 0;
-		groundLayerMask = (1 << LayerMask.NameToLayer ("Ground Layer"));
+        groundLayerMask = (1 << LayerMask.NameToLayer ("Ground Layer"));
         UpdateScore();
     }
 
@@ -66,21 +66,37 @@ public class PlayerController : MonoBehaviour {
     {
         if (other.gameObject.CompareTag ("Pick up")) {
 			other.gameObject.SetActive (false);
-			points = points + 1;
-			UpdateScore ();
+			UpdateScore (Constants.POINTS_DUMMY_PICKUP);
+		} else if (other.gameObject.CompareTag("White Gem Pickup")) {
+			other.gameObject.SetActive (false);
+			UpdateScore (Constants.POINTS_WHITE_GEM);
+		} else if (other.gameObject.CompareTag("Red Gem Pickup")) {
+			other.gameObject.SetActive (false);
+			UpdateScore (Constants.POINTS_RED_GEM);
+		} else if (other.gameObject.CompareTag("Pink Ball Pickup")) {
+			other.gameObject.SetActive (false);
+			UpdateScore (Constants.POINTS_PINK_BALL);
 		} else if (other.gameObject.CompareTag ("Trophy")) {
 			other.gameObject.SetActive(false);
 			gotTrophy = true;
 			trophyMessageBox.gameObject.SetActive(true);
+			UpdateScore(Constants.POINTS_TROPHY);
 		} else if (other.gameObject.CompareTag ("Door")) {
-			if (gotTrophy) Application.LoadLevel(nextLevelName);
+			if (gotTrophy) {
+				UpdateScore(Constants.POINTS_DOOR);
+				Application.LoadLevel(nextLevelName);
+			}
 		}
     }
 
-    void UpdateScore()
-    {
+    void UpdateScore() {
         score.text = "Score: " + points.ToString();
     }
+
+	void UpdateScore(int gainedPoints) {
+		points += gainedPoints;
+		UpdateScore ();
+	}
 
 	void Flip() {
 		Vector3 newScale = transform.localScale;
