@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour {
 	public float moveForce = 10f;
 	public float maxSpeed = 10f;
 	public float jumpForce = 300f;
+	public string nextLevelName = "Level1";
     public TextMesh score;
 	public TextMesh trophyMessageBox;
 
@@ -72,7 +73,7 @@ public class PlayerController : MonoBehaviour {
 			gotTrophy = true;
 			trophyMessageBox.gameObject.SetActive(true);
 		} else if (other.gameObject.CompareTag ("Door")) {
-			if (gotTrophy) Application.LoadLevel("Level1");
+			if (gotTrophy) Application.LoadLevel(nextLevelName);
 		}
     }
 
