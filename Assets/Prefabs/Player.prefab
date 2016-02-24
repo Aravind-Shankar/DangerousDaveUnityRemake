@@ -14,7 +14,7 @@ GameObject:
   - 61: {fileID: 6173228}
   m_Layer: 10
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -204,7 +204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveForce: 200
-  maxSpeed: 8
+  maxSpeed: 4
   jumpForce: 400
   nextLevelName: TestCharacter
   score: {fileID: 0}
@@ -307,6 +307,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Range
       value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: maxSpeed
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

@@ -34,6 +34,16 @@ public class PlayerController : MonoBehaviour {
 	public TextMesh trophyMessageBox;
 
     void Start() {
+//		if (score == null || trophyMessageBox == null)
+//		{
+//			score = PlayerRespawn.tempscore;
+//			trophyMessageBox = PlayerRespawn.temptrophy;
+//		}
+//		else
+//		{
+//			PlayerRespawn.tempscore = score;
+//			PlayerRespawn.temptrophy = trophyMessageBox;
+//		}
 		groundCheck = transform.Find ("ground_check");
 		groundCheckRelativePosition = transform.position - groundCheck.position;
         groundLayerMask = (1 << LayerMask.NameToLayer ("Ground Layer"));
