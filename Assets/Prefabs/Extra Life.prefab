@@ -145,7 +145,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d733334f03a2bff42878c6436ff94d98, type: 3}
-  m_Color: {r: .00729888212, g: .870328009, b: .992647052, a: 1}
+  m_Color: {r: 1, g: .994459212, b: .992647052, a: 1}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -156,6 +156,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_TagString
       value: Extra Life Pickup
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Color.g
+      value: .994459212
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

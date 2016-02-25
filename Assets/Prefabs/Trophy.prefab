@@ -41,7 +41,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 105406}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.8839016, y: -2.41301441, z: 0}
+  m_LocalPosition: {x: 25.8999996, y: -1.00999999, z: 0}
   m_LocalScale: {x: .205957249, y: .205957264, z: .205957264}
   m_Children:
   - {fileID: 460896}
@@ -117,6 +117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   brightTimeSeconds: .300000012
   darkTimeSeconds: .100000001
+  intensity: 8
 --- !u!212 &21204700
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -167,15 +168,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Color.r
-      value: .760784388
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Color.g
-      value: .760784388
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Color.b
-      value: .760784388
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

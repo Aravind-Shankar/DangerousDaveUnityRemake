@@ -493,6 +493,10 @@ Prefab:
       propertyPath: door
       value: 
       objectReference: {fileID: 1988247782}
+    - target: {fileID: 11490720, guid: a57f5103702fec644abf2aafe3a9e8e3, type: 2}
+      propertyPath: horizontalSpeed
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a57f5103702fec644abf2aafe3a9e8e3, type: 2}
   m_IsPrefabParent: 0

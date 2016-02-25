@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour {
 	*	See "TestCharacter.unity" for an example scene with a ball as the player.
 	*/
 
-	private static int points = 0;
+	public static int points = 0;
 	private static int lives = Constants.START_LIVES;
 
 	private bool canJump = false;
@@ -114,7 +114,9 @@ public class PlayerController : MonoBehaviour {
 		} else if (otherObject.CompareTag ("Door")) {
 			if (gotTrophy) {
 				UpdateScore(Constants.POINTS_DOOR);
-				Application.LoadLevel(nextLevelName);
+				if (nextLevelName != null && !nextLevelName.Equals(""))
+					Application.LoadLevel(nextLevelName);
+				else Application.Quit();
 			}
 		}
         else if (otherObject.CompareTag("Gem fusion"))
@@ -182,6 +184,8 @@ public class PlayerController : MonoBehaviour {
 
 	void UpdateTimestamp() {
 		timestampBox.text = timeLeftMinutes.ToString() + ":" + timeLeftSeconds.ToString() + " left";
+		if (timeLeftMinutes == 0)
+			timestampBox.color = Color.yellow;
 	}
 	
 	void UpdateScore(int gainedPoints) {

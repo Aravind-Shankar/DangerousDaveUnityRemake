@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 467346}
   - 212: {fileID: 21263512}
   - 58: {fileID: 5869172}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Pink Ball
   m_TagString: Pink Ball Pickup
   m_Icon: {fileID: 0}
@@ -84,6 +84,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_TagString
       value: Pink Ball Pickup
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

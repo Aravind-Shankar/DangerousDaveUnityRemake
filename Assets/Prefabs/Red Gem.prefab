@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 467346}
   - 212: {fileID: 21263512}
   - 61: {fileID: 6180646}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Red Gem
   m_TagString: Red Gem Pickup
   m_Icon: {fileID: 0}
@@ -92,6 +92,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: rotationVector.y
       value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
