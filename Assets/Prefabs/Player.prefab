@@ -232,8 +232,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fab9cd40f8373d4ab5b41ca937d8eac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 3.5
-  jumpForce: 355
+  horizontalSpeed: 3.5
+  jumpSpeed: 7.0999999
   respawnDelaySeconds: 1
   nextLevelName: TestCharacter
   score: {fileID: 0}

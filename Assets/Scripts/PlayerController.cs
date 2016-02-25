@@ -29,8 +29,8 @@ public class PlayerController : MonoBehaviour {
     private int groundLayerMask;
 
 //	public float moveForce = 10f;
-	public float maxSpeed = 3.5f;
-	public float jumpForce = 355f;
+	public float horizontalSpeed = 3.5f;
+	public float jumpSpeed = 8f;
 	public float respawnDelaySeconds = 1.0f;
 	public string nextLevelName = "Level1";
     public TextMesh score;
@@ -69,19 +69,14 @@ public class PlayerController : MonoBehaviour {
 	void FixedUpdate () {
 		float horiz = Input.GetAxis ("Horizontal");
 		Vector2 newVelocity = GetComponent<Rigidbody2D> ().velocity;
-		newVelocity.x = (horiz == 0.0f) ? 0.0f : Mathf.Sign (horiz) * maxSpeed;
-		GetComponent<Rigidbody2D> ().velocity = newVelocity;
-//		if (horiz * GetComponent<Rigidbody2D> ().velocity.x < maxSpeed)
-//			GetComponent<Rigidbody2D> ().AddForce (Vector2.right * horiz * moveForce * Time.deltaTime);
-//		if (Mathf.Abs (GetComponent<Rigidbody2D> ().velocity.x) > maxSpeed)
-//			GetComponent<Rigidbody2D> ().velocity = new Vector2(Mathf.Sign (GetComponent<Rigidbody2D> ().velocity.x) * maxSpeed,
-//			                                                    GetComponent<Rigidbody2D>().velocity.y);
+		newVelocity.x = (horiz == 0.0f) ? 0.0f : Mathf.Sign (horiz) * horizontalSpeed;
 		if ((horiz < 0 && facingRight) || (horiz > 0 && !facingRight))
 			Flip ();
 		if (canJump) {
-			GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpForce);
+			newVelocity.y = jumpSpeed;
 			canJump = false;
 		}
+		GetComponent<Rigidbody2D> ().velocity = newVelocity;
 	}
 
     void OnTriggerEnter2D(Collider2D other)
