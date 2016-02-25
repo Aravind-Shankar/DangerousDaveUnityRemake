@@ -23,14 +23,14 @@ public class PlayerController : MonoBehaviour {
 	private bool grounded = false;
 	private bool facingRight = true;
 	private bool gotTrophy = false;
-	private Transform groundCheck;
+	private Transform groundCheckLeft, groundCheckRight;
 	private Transform radarPlayer;
-	private Vector3 groundCheckRelativePosition;
+//	private Vector3 groundCheckRelativePosition;
     private int groundLayerMask;
 
-	public float moveForce = 10f;
-	public float maxSpeed = 10f;
-	public float jumpForce = 300f;
+//	public float moveForce = 10f;
+	public float maxSpeed = 3.5f;
+	public float jumpForce = 355f;
 	public float respawnDelaySeconds = 1.0f;
 	public string nextLevelName = "Level1";
     public TextMesh score;
@@ -50,27 +50,32 @@ public class PlayerController : MonoBehaviour {
 //			PlayerRespawn.temptrophy = trophyMessageBox;
 //		}
 		radarPlayer = transform.Find("RadarPlayer");
-		groundCheck = transform.Find ("ground_check");
-		groundCheckRelativePosition = transform.position - groundCheck.position;
+		groundCheckLeft = transform.Find ("Ground Check Left");
+		groundCheckRight = transform.Find ("Ground Check Right");
+//		groundCheckRelativePosition = transform.position - groundCheck.position;
         groundLayerMask = (1 << LayerMask.NameToLayer ("Ground Layer"));
         UpdateScore();
 		UpdateLives ();
     }
 
 	void Update() {
-		groundCheck.position = transform.position - groundCheckRelativePosition;
-		grounded = Physics2D.Linecast(transform.position, groundCheck.position, groundLayerMask);
+//		groundCheck.position = transform.position - groundCheckRelativePosition;
+		grounded = Physics2D.Linecast(transform.position, groundCheckLeft.position, groundLayerMask) ||
+			Physics2D.Linecast(transform.position, groundCheckRight.position, groundLayerMask);
 		if (Input.GetButtonDown ("Jump") && grounded)
 			canJump = true;
 	}
 	
 	void FixedUpdate () {
 		float horiz = Input.GetAxis ("Horizontal");
-		if (horiz * GetComponent<Rigidbody2D> ().velocity.x < maxSpeed)
-			GetComponent<Rigidbody2D> ().AddForce (Vector2.right * horiz * moveForce);
-		if (Mathf.Abs (GetComponent<Rigidbody2D> ().velocity.x) > maxSpeed)
-			GetComponent<Rigidbody2D> ().velocity = new Vector2(Mathf.Sign (GetComponent<Rigidbody2D> ().velocity.x) * maxSpeed,
-			                                                    GetComponent<Rigidbody2D>().velocity.y);
+		Vector2 newVelocity = GetComponent<Rigidbody2D> ().velocity;
+		newVelocity.x = (horiz == 0.0f) ? 0.0f : Mathf.Sign (horiz) * maxSpeed;
+		GetComponent<Rigidbody2D> ().velocity = newVelocity;
+//		if (horiz * GetComponent<Rigidbody2D> ().velocity.x < maxSpeed)
+//			GetComponent<Rigidbody2D> ().AddForce (Vector2.right * horiz * moveForce * Time.deltaTime);
+//		if (Mathf.Abs (GetComponent<Rigidbody2D> ().velocity.x) > maxSpeed)
+//			GetComponent<Rigidbody2D> ().velocity = new Vector2(Mathf.Sign (GetComponent<Rigidbody2D> ().velocity.x) * maxSpeed,
+//			                                                    GetComponent<Rigidbody2D>().velocity.y);
 		if ((horiz < 0 && facingRight) || (horiz > 0 && !facingRight))
 			Flip ();
 		if (canJump) {
