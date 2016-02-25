@@ -25,10 +25,9 @@ public class PlayerController : MonoBehaviour {
 	private bool gotTrophy = false;
 	private Transform groundCheckLeft, groundCheckRight;
 	private Transform radarPlayer;
-//	private Vector3 groundCheckRelativePosition;
     private int groundLayerMask;
 
-//	public float moveForce = 10f;
+	public int timeLeftMinutes, timeLeftSeconds;
 	public float horizontalSpeed = 3.5f;
 	public float jumpSpeed = 8f;
 	public float respawnDelaySeconds = 1.0f;
@@ -36,31 +35,24 @@ public class PlayerController : MonoBehaviour {
     public TextMesh score;
 	public TextMesh trophyMessageBox;
 	public TextMesh lifeCountBox;
+	public TextMesh timestampBox;
 	public GameObject door;
 	public Transform spawnPoint;
 
 	void Start() {
-//		if (score == null || trophyMessageBox == null)
-//		{
-//			score = PlayerRespawn.tempscore;
-//			trophyMessageBox = PlayerRespawn.temptrophy;
-//		}
-//		else
-//		{
-//			PlayerRespawn.tempscore = score;
-//			PlayerRespawn.temptrophy = trophyMessageBox;
-//		}
 		radarPlayer = transform.Find("RadarPlayer");
 		groundCheckLeft = transform.Find ("Ground Check Left");
 		groundCheckRight = transform.Find ("Ground Check Right");
-//		groundCheckRelativePosition = transform.position - groundCheck.position;
         groundLayerMask = (1 << LayerMask.NameToLayer ("Ground Layer"));
         UpdateScore();
 		UpdateLives ();
+		if (timestampBox != null) {
+			UpdateTimestamp();
+			StartCoroutine(CountdownTimer());
+		}
     }
 
 	void Update() {
-//		groundCheck.position = transform.position - groundCheckRelativePosition;
 		grounded = Physics2D.Linecast(transform.position, groundCheckLeft.position, groundLayerMask) ||
 			Physics2D.Linecast(transform.position, groundCheckRight.position, groundLayerMask);
 		if (Input.GetButtonDown ("Jump") && grounded)
@@ -127,6 +119,10 @@ public class PlayerController : MonoBehaviour {
 	void UpdateLives() {
 		lifeCountBox.text = "x " + lives.ToString();
 	}
+
+	void UpdateTimestamp() {
+		timestampBox.text = timeLeftMinutes.ToString() + ":" + timeLeftSeconds.ToString() + " left";
+	}
 	
 	void UpdateScore(int gainedPoints) {
 		points += gainedPoints;
@@ -174,5 +170,17 @@ public class PlayerController : MonoBehaviour {
 		gameObject.GetComponent<Collider2D> ().enabled = true;
 		transform.position = spawnPoint.transform.position;
 		Initialize();
+	}
+
+	private IEnumerator CountdownTimer() {
+		int totalSeconds = 60 * timeLeftMinutes + timeLeftSeconds;
+		while (totalSeconds > 0) {
+			yield return new WaitForSeconds(1.0f);
+			--totalSeconds;
+			timeLeftMinutes = totalSeconds / 60;
+			timeLeftSeconds = totalSeconds % 60;
+			UpdateTimestamp();
+		}
+		Application.Quit ();
 	}
 }
