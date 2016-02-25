@@ -18,6 +18,8 @@ public class PlayerRespawn : MonoBehaviour {
 		if (other.CompareTag ("Player")) {
 			other.gameObject.transform.position = spawnpoint.transform.position;
 			other.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+			if (!PlayerController.DieAndCheck(other.gameObject))
+				Application.Quit();
 		}
 	}
 }

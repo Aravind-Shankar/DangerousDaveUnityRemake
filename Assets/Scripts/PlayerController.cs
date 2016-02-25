@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour {
 	*/
 
 	private static int points = 0;
+	private static int lives = Constants.MAX_LIVES;
 
 	private bool canJump = false;
 	private bool grounded = true;
@@ -32,6 +33,16 @@ public class PlayerController : MonoBehaviour {
 	public string nextLevelName = "Level1";
     public TextMesh score;
 	public TextMesh trophyMessageBox;
+	public TextMesh lifeCountBox;
+
+	public static bool DieAndCheck(GameObject player) {
+		if (lives > 0) {
+			--lives;
+			player.GetComponent<PlayerController> ().UpdateLives ();
+			return (lives > 0);
+		} else
+			return false;
+	}
 
     void Start() {
 //		if (score == null || trophyMessageBox == null)
@@ -48,6 +59,7 @@ public class PlayerController : MonoBehaviour {
 		groundCheckRelativePosition = transform.position - groundCheck.position;
         groundLayerMask = (1 << LayerMask.NameToLayer ("Ground Layer"));
         UpdateScore();
+		UpdateLives ();
     }
 
 	void Update() {
@@ -99,10 +111,14 @@ public class PlayerController : MonoBehaviour {
 		}
     }
 
-    void UpdateScore() {
-        score.text = "Score: " + points.ToString();
-    }
+	void UpdateScore() {
+		score.text = "Score: " + points.ToString();
+	}
 
+	void UpdateLives() {
+		lifeCountBox.text = "x " + lives.ToString();
+	}
+	
 	void UpdateScore(int gainedPoints) {
 		points += gainedPoints;
 		UpdateScore ();
