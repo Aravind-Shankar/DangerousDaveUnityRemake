@@ -240,6 +240,7 @@ MonoBehaviour:
   trophyMessageBox: {fileID: 0}
   lifeCountBox: {fileID: 0}
   door: {fileID: 0}
+  spawnPoint: {fileID: 0}
 --- !u!212 &21208596
 SpriteRenderer:
   m_ObjectHideFlags: 1

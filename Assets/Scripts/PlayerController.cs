@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour {
 	public TextMesh trophyMessageBox;
 	public TextMesh lifeCountBox;
 	public GameObject door;
+	public Transform spawnPoint;
 
 	void Start() {
 //		if (score == null || trophyMessageBox == null)
@@ -101,6 +102,10 @@ public class PlayerController : MonoBehaviour {
 			UpdateScore(Constants.POINTS_EXTRA_LIFE);
 		} else if (otherObject.CompareTag("Wormhole Point")) {
 			otherObject.GetComponentInParent<WormholeController>().EnterWormhole(otherObject);
+		} else if (otherObject.CompareTag("Checkpoint")) {
+			this.spawnPoint = otherObject.transform;
+			otherObject.GetComponent<SpriteRenderer>().color = Color.green;
+			otherObject.GetComponent<Collider2D>().enabled = false;
 		} else if (otherObject.CompareTag ("Trophy")) {
 			otherObject.SetActive(false);
 			gotTrophy = true;

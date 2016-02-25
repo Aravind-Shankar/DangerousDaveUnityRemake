@@ -625,7 +625,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f90b04f13a59aff43b216a7d97442c0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoint: {fileID: 1000011993}
 --- !u!1001 &670135334
 Prefab:
   m_ObjectHideFlags: 0
@@ -777,6 +776,48 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
+--- !u!1001 &1000310533
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 487772, guid: da2c76df38e2646499431c4e0fe7c5dd, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 6.67999983
+      objectReference: {fileID: 0}
+    - target: {fileID: 487772, guid: da2c76df38e2646499431c4e0fe7c5dd, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1.94000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 487772, guid: da2c76df38e2646499431c4e0fe7c5dd, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 487772, guid: da2c76df38e2646499431c4e0fe7c5dd, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 487772, guid: da2c76df38e2646499431c4e0fe7c5dd, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 487772, guid: da2c76df38e2646499431c4e0fe7c5dd, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 487772, guid: da2c76df38e2646499431c4e0fe7c5dd, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 487772, guid: da2c76df38e2646499431c4e0fe7c5dd, type: 2}
+      propertyPath: m_RootOrder
+      value: 18
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: da2c76df38e2646499431c4e0fe7c5dd, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &1032559768
 Prefab:
   m_ObjectHideFlags: 0
@@ -1381,6 +1422,10 @@ Prefab:
       propertyPath: door
       value: 
       objectReference: {fileID: 1894125774}
+    - target: {fileID: 11490720, guid: a57f5103702fec644abf2aafe3a9e8e3, type: 2}
+      propertyPath: spawnPoint
+      value: 
+      objectReference: {fileID: 1000011993}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a57f5103702fec644abf2aafe3a9e8e3, type: 2}
   m_IsPrefabParent: 0
@@ -2019,7 +2064,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 412646, guid: 3a64ee1f91368e542808adeec773bda0, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 25.8626842
+      value: 25.9799995
       objectReference: {fileID: 0}
     - target: {fileID: 412646, guid: 3a64ee1f91368e542808adeec773bda0, type: 2}
       propertyPath: m_LocalPosition.y
