@@ -30,18 +30,27 @@ public class PlayerController : MonoBehaviour {
 	public float moveForce = 10f;
 	public float maxSpeed = 10f;
 	public float jumpForce = 300f;
+	public float respawnDelaySeconds = 1.0f;
 	public string nextLevelName = "Level1";
     public TextMesh score;
 	public TextMesh trophyMessageBox;
 	public TextMesh lifeCountBox;
 
-	public static bool DieAndCheck(GameObject player) {
+	public bool DieAndCheck() {
 		if (lives > 0) {
 			--lives;
-			player.GetComponent<PlayerController> ().UpdateLives ();
+			UpdateLives ();
 			return (lives > 0);
 		} else
 			return false;
+	}
+
+	public IEnumerator Respawn(Transform spawnPoint) {
+		this.gameObject.SetActive (false);
+		yield return new WaitForSeconds(respawnDelaySeconds);
+		this.gameObject.SetActive (true);
+		transform.position = spawnPoint.transform.position;
+		Initialize();
 	}
 
     void Start() {
@@ -129,5 +138,13 @@ public class PlayerController : MonoBehaviour {
 		newScale.x *= -1;
 		transform.localScale = newScale;
 		facingRight = !facingRight;
+	}
+
+	public void Initialize() {
+		GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+		canJump = false;
+		grounded = true;
+		if (!facingRight)
+			Flip ();
 	}
 }

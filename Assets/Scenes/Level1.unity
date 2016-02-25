@@ -406,7 +406,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 439104, guid: 3bcbdbdd4074f1648b43bf777b53a398, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -4.88999987
+      value: -8.38000011
       objectReference: {fileID: 0}
     - target: {fileID: 439104, guid: 3bcbdbdd4074f1648b43bf777b53a398, type: 2}
       propertyPath: m_LocalPosition.y
@@ -440,10 +440,6 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 2101254648}
-    - target: {fileID: 11408904, guid: 3bcbdbdd4074f1648b43bf777b53a398, type: 2}
-      propertyPath: thresh
-      value: .400000006
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3bcbdbdd4074f1648b43bf777b53a398, type: 2}
   m_IsPrefabParent: 0
@@ -626,7 +622,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 101478, guid: a57f5103702fec644abf2aafe3a9e8e3, type: 2}
-  spawnpoint: {fileID: 1000011993}
+  spawnPoint: {fileID: 1000011993}
 --- !u!1001 &670135334
 Prefab:
   m_ObjectHideFlags: 0
@@ -925,11 +921,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 485714, guid: f2409a0824790b14bad9c81d2c719568, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: .0500000007
       objectReference: {fileID: 0}
     - target: {fileID: 485714, guid: f2409a0824790b14bad9c81d2c719568, type: 2}
       propertyPath: m_LocalPosition.y
-      value: .0500000007
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 485714, guid: f2409a0824790b14bad9c81d2c719568, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1198,7 +1194,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 2005450, guid: 3f3705e76aaf05d49975280a96290c3c, type: 2}
       propertyPath: orthographic size
-      value: 9.63989449
+      value: 12.9745369
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3f3705e76aaf05d49975280a96290c3c, type: 2}

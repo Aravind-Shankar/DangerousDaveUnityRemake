@@ -4,7 +4,7 @@ using System.Collections;
 public class PlayerRespawn : MonoBehaviour {
 	
 	public GameObject player;
-	public Transform spawnpoint;
+	public Transform spawnPoint;
 //	static public TextMesh tempscore;
 //	static public TextMesh temptrophy;
 	
@@ -16,10 +16,11 @@ public class PlayerRespawn : MonoBehaviour {
 //		var cam = Camera.main.GetComponent<CameraController>();
 //		cam.player = P.transform;
 		if (other.CompareTag ("Player")) {
-			other.gameObject.transform.position = spawnpoint.transform.position;
-			other.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-			if (!PlayerController.DieAndCheck(other.gameObject))
+			if (!other.gameObject.GetComponent<PlayerController>().DieAndCheck())
 				Application.Quit();
+			else
+				StartCoroutine(other.gameObject.GetComponent<PlayerController>().Respawn(spawnPoint));
 		}
 	}
+
 }

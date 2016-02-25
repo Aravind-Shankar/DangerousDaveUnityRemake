@@ -143,7 +143,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 123252}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.6599998, y: -3.8900001, z: 5}
+  m_LocalPosition: {x: -9.84000015, y: -3.8900001, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 434646}
@@ -171,7 +171,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 145080}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.88999987, y: -1.08000004, z: -10}
+  m_LocalPosition: {x: -8.38000011, y: -1.08000004, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 434646}
@@ -184,7 +184,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 195660}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: 6.28000021, z: 5}
+  m_LocalPosition: {x: 3.06999993, y: 6.28000021, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 456852}
@@ -222,7 +222,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 143680}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.9799995, y: 6.28000021, z: 5}
+  m_LocalPosition: {x: -10.1499996, y: 6.28000021, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 434646}
@@ -468,7 +468,7 @@ TextMesh:
   m_GameObject: {fileID: 123252}
   m_Text: GO THRU THE DOOR!
   m_OffsetZ: 0
-  m_CharacterSize: .899999976
+  m_CharacterSize: .800000012
   m_LineSpacing: 1
   m_Anchor: 0
   m_Alignment: 0
