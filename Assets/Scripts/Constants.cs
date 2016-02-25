@@ -8,8 +8,9 @@ public class Constants {
 	public static int POINTS_RED_GEM = 150;
 	public static int POINTS_WHITE_GEM = 100;
 	public static int POINTS_PINK_BALL = 50;
+    public static int POINTS_SPECIAL = 50;
 
-	public static int POINTS_EXTRA_LIFE = 500;
+    public static int POINTS_EXTRA_LIFE = 500;
 	public static int POINTS_TROPHY = 1000;
 	public static int POINTS_DOOR = 2000;
 

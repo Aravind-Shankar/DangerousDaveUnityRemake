@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour {
 
@@ -87,7 +88,13 @@ public class PlayerController : MonoBehaviour {
 		} else if (otherObject.CompareTag ("Pink Ball Pickup")) {
 			otherObject.SetActive (false);
 			UpdateScore (Constants.POINTS_PINK_BALL);
-		} else if (otherObject.CompareTag("Extra Life Pickup")) {
+        }
+        else if (otherObject.CompareTag("Special Gem"))
+        {
+            otherObject.SetActive(false);
+            UpdateScore(Constants.POINTS_SPECIAL);
+        }
+        else if (otherObject.CompareTag("Extra Life Pickup")) {
 			otherObject.SetActive(false);
 			++lives;
 			UpdateLives();
@@ -110,7 +117,60 @@ public class PlayerController : MonoBehaviour {
 				Application.LoadLevel(nextLevelName);
 			}
 		}
+        else if (otherObject.CompareTag("Gem fusion"))
+        {
+            int total = 0;
+            var pos = otherObject.transform.position;
+            var a=FindGameObjectsWithLayer(LayerMask.NameToLayer("Gems"));
+            Vector3 p = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, Camera.main.nearClipPlane));
+
+            for(int i=0;i<a.Length;i++)
+            {
+                if(((a[i].transform.position.x <= p.x)&&(pos.x <= p.x)) || ((a[i].transform.position.x >= p.x) && (pos.x >= p.x)))
+                {
+                    if (a[i].CompareTag("White Gem Pickup"))
+                    {
+                        a[i].SetActive(false);
+                        total+=Constants.POINTS_WHITE_GEM;
+                    }
+                    else if (a[i].CompareTag("Red Gem Pickup"))
+                    {
+                        a[i].SetActive(false);
+                        total+=Constants.POINTS_RED_GEM;
+                    }
+                    else if (a[i].CompareTag("Pink Ball Pickup"))
+                    {
+                        a[i].SetActive(false);
+                        total+=Constants.POINTS_PINK_BALL;
+                    }
+                }
+
+               otherObject.GetComponent<Renderer>().enabled = false;
+               otherObject.transform.Find("Special Gem").gameObject.SetActive(true);
+               otherObject.transform.Find("Special Gem").gameObject.GetComponent<Renderer>().enabled=true;
+               otherObject.GetComponent<Collider2D>().enabled = false;
+               Constants.POINTS_SPECIAL = total;
+            }
+        }
     }
+
+    GameObject [] FindGameObjectsWithLayer(int layer)
+    {
+         var goArray = (GameObject[])FindObjectsOfType(typeof(GameObject));
+         List<GameObject> list = new List<GameObject>();
+
+         for (int i = 0; i<goArray.Length; i++)
+         {
+             if (goArray[i].layer == layer)
+             {
+                 list.Add(goArray[i]);
+             }
+         }
+         if (list.Count == 0) {
+             return null;
+         }
+         return list.ToArray();
+   }
 
 	void UpdateScore() {
 		score.text = "Score: " + points.ToString();
