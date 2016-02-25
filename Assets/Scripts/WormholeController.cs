@@ -17,7 +17,7 @@ public class WormholeController : MonoBehaviour {
 	public void EnterWormhole(GameObject entryPoint) {
 		Transform exitPoint = ((entryPoint.name.Equals (point1.name)) ? point2 : point1).transform;
 		StartCoroutine(player.GetComponent<PlayerController> ().Respawn (exitPoint));
-		player.SetActive (false);
+		player.GetComponent<PlayerController>().Disappear();
 		StartCoroutine (ReEnableWormhole ());
 		point1.GetComponent<Renderer> ().enabled = false;
 		point2.GetComponent<Renderer> ().enabled = false;

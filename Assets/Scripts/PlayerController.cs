@@ -146,10 +146,14 @@ public class PlayerController : MonoBehaviour {
 			Flip ();
 	}
 
-	public bool DieAndCheck() {
-		gameObject.GetComponent<Renderer>().enabled = false;
+	public void Disappear() {
+		gameObject.GetComponent<Renderer> ().enabled = false;
 		radarPlayer.gameObject.GetComponent<Renderer> ().enabled = false;
 		gameObject.GetComponent<Collider2D> ().enabled = false;
+	}
+
+	public bool DieAndCheck() {
+		Disappear ();
 		if (lives > 0) {
 			--lives;
 			UpdateLives ();
