@@ -11,6 +11,7 @@ TagManager:
   - White Gem Pickup
   - Red Gem Pickup
   - Extra Life Pickup
+  - Wormhole Point
   layers:
   - Default
   - TransparentFX

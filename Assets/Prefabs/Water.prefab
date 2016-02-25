@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 452352}
   - 212: {fileID: 21209432}
   - 61: {fileID: 6147874}
+  - 114: {fileID: 11483864}
   m_Layer: 0
   m_Name: Water
   m_TagString: Untagged
@@ -42,6 +43,18 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 5, y: .455527097}
+--- !u!114 &11483864
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 118046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f90b04f13a59aff43b216a7d97442c0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPoint: {fileID: 0}
 --- !u!212 &21209432
 SpriteRenderer:
   m_ObjectHideFlags: 1

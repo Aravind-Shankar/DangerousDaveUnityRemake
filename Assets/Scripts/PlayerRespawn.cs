@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerRespawn : MonoBehaviour {
 	
-	public GameObject player;
+//	public GameObject player;
 	public Transform spawnPoint;
 //	static public TextMesh tempscore;
 //	static public TextMesh temptrophy;

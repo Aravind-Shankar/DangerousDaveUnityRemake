@@ -5,6 +5,7 @@ public class LightBlinking : MonoBehaviour {
 	
 	public float brightTimeSeconds = 0.5f;
 	public float darkTimeSeconds = 0.5f;
+	public float intensity = 8f;
 	
 	private Light light;
 	
@@ -14,12 +15,9 @@ public class LightBlinking : MonoBehaviour {
 		StartCoroutine (BlinkLight ());
 	}
 	
-	void Update() {
-	}
-	
 	IEnumerator BlinkLight() {
 		while (true) {
-			light.intensity = 8;
+			light.intensity = intensity;
 			yield return new WaitForSeconds(brightTimeSeconds);
 			light.intensity = 1;
 			yield return new WaitForSeconds(darkTimeSeconds);

@@ -20,10 +20,11 @@ public class PlayerController : MonoBehaviour {
 	private static int lives = Constants.START_LIVES;
 
 	private bool canJump = false;
-	private bool grounded = true;
+	private bool grounded = false;
 	private bool facingRight = true;
 	private bool gotTrophy = false;
 	private Transform groundCheck;
+	private Transform radarPlayer;
 	private Vector3 groundCheckRelativePosition;
     private int groundLayerMask;
 
@@ -35,6 +36,7 @@ public class PlayerController : MonoBehaviour {
     public TextMesh score;
 	public TextMesh trophyMessageBox;
 	public TextMesh lifeCountBox;
+	public GameObject door;
 
 	void Start() {
 //		if (score == null || trophyMessageBox == null)
@@ -47,6 +49,7 @@ public class PlayerController : MonoBehaviour {
 //			PlayerRespawn.tempscore = score;
 //			PlayerRespawn.temptrophy = trophyMessageBox;
 //		}
+		radarPlayer = transform.Find("RadarPlayer");
 		groundCheck = transform.Find ("ground_check");
 		groundCheckRelativePosition = transform.position - groundCheck.position;
         groundLayerMask = (1 << LayerMask.NameToLayer ("Ground Layer"));
@@ -78,29 +81,33 @@ public class PlayerController : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag ("Pick up")) {
-			other.gameObject.SetActive (false);
+		GameObject otherObject = other.gameObject;
+        if (otherObject.CompareTag ("Pick up")) {
+			otherObject.SetActive (false);
 			UpdateScore (Constants.POINTS_DUMMY_PICKUP);
-		} else if (other.gameObject.CompareTag ("White Gem Pickup")) {
-			other.gameObject.SetActive (false);
+		} else if (otherObject.CompareTag ("White Gem Pickup")) {
+			otherObject.SetActive (false);
 			UpdateScore (Constants.POINTS_WHITE_GEM);
-		} else if (other.gameObject.CompareTag ("Red Gem Pickup")) {
-			other.gameObject.SetActive (false);
+		} else if (otherObject.CompareTag ("Red Gem Pickup")) {
+			otherObject.SetActive (false);
 			UpdateScore (Constants.POINTS_RED_GEM);
-		} else if (other.gameObject.CompareTag ("Pink Ball Pickup")) {
-			other.gameObject.SetActive (false);
+		} else if (otherObject.CompareTag ("Pink Ball Pickup")) {
+			otherObject.SetActive (false);
 			UpdateScore (Constants.POINTS_PINK_BALL);
-		} else if (other.gameObject.CompareTag("Extra Life Pickup")) {
-			other.gameObject.SetActive(false);
+		} else if (otherObject.CompareTag("Extra Life Pickup")) {
+			otherObject.SetActive(false);
 			++lives;
 			UpdateLives();
 			UpdateScore(Constants.POINTS_EXTRA_LIFE);
-		} else if (other.gameObject.CompareTag ("Trophy")) {
-			other.gameObject.SetActive(false);
+		} else if (otherObject.CompareTag("Wormhole Point")) {
+			otherObject.GetComponentInParent<WormholeController>().EnterWormhole(otherObject);
+		} else if (otherObject.CompareTag ("Trophy")) {
+			otherObject.SetActive(false);
 			gotTrophy = true;
 			trophyMessageBox.gameObject.SetActive(true);
+			door.GetComponent<Renderer>().enabled = true;
 			UpdateScore(Constants.POINTS_TROPHY);
-		} else if (other.gameObject.CompareTag ("Door")) {
+		} else if (otherObject.CompareTag ("Door")) {
 			if (gotTrophy) {
 				UpdateScore(Constants.POINTS_DOOR);
 				Application.LoadLevel(nextLevelName);
@@ -125,19 +132,24 @@ public class PlayerController : MonoBehaviour {
 		Vector3 newScale = transform.localScale;
 		newScale.x *= -1;
 		transform.localScale = newScale;
+		newScale = radarPlayer.localScale;
+		newScale.x *= -1;
+		radarPlayer.localScale = newScale;
 		facingRight = !facingRight;
 	}
 
 	public void Initialize() {
 		GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 		canJump = false;
-		grounded = true;
+		grounded = false;
 		if (!facingRight)
 			Flip ();
 	}
 
 	public bool DieAndCheck() {
-		this.gameObject.SetActive(false);
+		gameObject.GetComponent<Renderer>().enabled = false;
+		radarPlayer.gameObject.GetComponent<Renderer> ().enabled = false;
+		gameObject.GetComponent<Collider2D> ().enabled = false;
 		if (lives > 0) {
 			--lives;
 			UpdateLives ();
@@ -148,7 +160,9 @@ public class PlayerController : MonoBehaviour {
 	
 	public IEnumerator Respawn(Transform spawnPoint) {
 		yield return new WaitForSeconds(respawnDelaySeconds);
-		this.gameObject.SetActive (true);
+		radarPlayer.gameObject.GetComponent<Renderer> ().enabled = true;
+		gameObject.GetComponent<Renderer> ().enabled = true;
+		gameObject.GetComponent<Collider2D> ().enabled = true;
 		transform.position = spawnPoint.transform.position;
 		Initialize();
 	}

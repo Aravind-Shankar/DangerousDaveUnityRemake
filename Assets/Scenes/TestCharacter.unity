@@ -489,6 +489,10 @@ Prefab:
       propertyPath: maxSpeed
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 11490720, guid: a57f5103702fec644abf2aafe3a9e8e3, type: 2}
+      propertyPath: door
+      value: 
+      objectReference: {fileID: 1988247782}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a57f5103702fec644abf2aafe3a9e8e3, type: 2}
   m_IsPrefabParent: 0
@@ -641,9 +645,21 @@ Prefab:
       propertyPath: m_LocalPosition.x
       value: 17.9899998
       objectReference: {fileID: 0}
+    - target: {fileID: 11451894, guid: 3a64ee1f91368e542808adeec773bda0, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10844316, guid: 3a64ee1f91368e542808adeec773bda0, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3a64ee1f91368e542808adeec773bda0, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1988247782 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 121114, guid: 3a64ee1f91368e542808adeec773bda0, type: 2}
+  m_PrefabInternal: {fileID: 1988247781}
 --- !u!102 &1993218236 stripped
 TextMesh:
   m_PrefabParentObject: {fileID: 10214398, guid: 3bcbdbdd4074f1648b43bf777b53a398,
