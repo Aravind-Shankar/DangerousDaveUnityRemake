@@ -10,6 +10,7 @@ TagManager:
   - Pink Ball Pickup
   - White Gem Pickup
   - Red Gem Pickup
+  - Extra Life Pickup
   layers:
   - Default
   - TransparentFX

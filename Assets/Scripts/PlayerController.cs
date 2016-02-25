@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour {
 	*/
 
 	private static int points = 0;
-	private static int lives = Constants.MAX_LIVES;
+	private static int lives = Constants.START_LIVES;
 
 	private bool canJump = false;
 	private bool grounded = true;
@@ -36,24 +36,7 @@ public class PlayerController : MonoBehaviour {
 	public TextMesh trophyMessageBox;
 	public TextMesh lifeCountBox;
 
-	public bool DieAndCheck() {
-		if (lives > 0) {
-			--lives;
-			UpdateLives ();
-			return (lives > 0);
-		} else
-			return false;
-	}
-
-	public IEnumerator Respawn(Transform spawnPoint) {
-		this.gameObject.SetActive (false);
-		yield return new WaitForSeconds(respawnDelaySeconds);
-		this.gameObject.SetActive (true);
-		transform.position = spawnPoint.transform.position;
-		Initialize();
-	}
-
-    void Start() {
+	void Start() {
 //		if (score == null || trophyMessageBox == null)
 //		{
 //			score = PlayerRespawn.tempscore;
@@ -98,15 +81,20 @@ public class PlayerController : MonoBehaviour {
         if (other.gameObject.CompareTag ("Pick up")) {
 			other.gameObject.SetActive (false);
 			UpdateScore (Constants.POINTS_DUMMY_PICKUP);
-		} else if (other.gameObject.CompareTag("White Gem Pickup")) {
+		} else if (other.gameObject.CompareTag ("White Gem Pickup")) {
 			other.gameObject.SetActive (false);
 			UpdateScore (Constants.POINTS_WHITE_GEM);
-		} else if (other.gameObject.CompareTag("Red Gem Pickup")) {
+		} else if (other.gameObject.CompareTag ("Red Gem Pickup")) {
 			other.gameObject.SetActive (false);
 			UpdateScore (Constants.POINTS_RED_GEM);
-		} else if (other.gameObject.CompareTag("Pink Ball Pickup")) {
+		} else if (other.gameObject.CompareTag ("Pink Ball Pickup")) {
 			other.gameObject.SetActive (false);
 			UpdateScore (Constants.POINTS_PINK_BALL);
+		} else if (other.gameObject.CompareTag("Extra Life Pickup")) {
+			other.gameObject.SetActive(false);
+			++lives;
+			UpdateLives();
+			UpdateScore(Constants.POINTS_EXTRA_LIFE);
 		} else if (other.gameObject.CompareTag ("Trophy")) {
 			other.gameObject.SetActive(false);
 			gotTrophy = true;
@@ -146,5 +134,22 @@ public class PlayerController : MonoBehaviour {
 		grounded = true;
 		if (!facingRight)
 			Flip ();
+	}
+
+	public bool DieAndCheck() {
+		this.gameObject.SetActive(false);
+		if (lives > 0) {
+			--lives;
+			UpdateLives ();
+			return (lives > 0);
+		} else
+			return false;
+	}
+	
+	public IEnumerator Respawn(Transform spawnPoint) {
+		yield return new WaitForSeconds(respawnDelaySeconds);
+		this.gameObject.SetActive (true);
+		transform.position = spawnPoint.transform.position;
+		Initialize();
 	}
 }
